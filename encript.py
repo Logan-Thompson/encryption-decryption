@@ -1,9 +1,9 @@
-# imports necessary functions.
+# Imports necessary functions.
 import random
 from math import factorial
 
 
-# gives the ending information after the file has been encrypted or decrypted.
+# Gives the ending information after the file has been encrypted or decrypted.
 def finalConformation(choice, password, alphabet):
 	if choice == "e":
 		print ""
@@ -20,7 +20,7 @@ def finalConformation(choice, password, alphabet):
 		print ""
 
 
-# get name of input and output file and the password.
+# Get name of input and output file and the password.
 def getInformation(choice):
 	if choice == "e":
 		print "What is the name of your source_file"
@@ -40,11 +40,11 @@ def getInformation(choice):
 	return (sourceFile, destinationFile, password)
 
 
-# collects user input.
+# Collects user input.
 def getInput():
     return raw_input("> ")
 
-# part of nPr function.
+# Part of nPr function.
 def product(iterable):
     prod = 1
     for n in iterable:
@@ -52,14 +52,14 @@ def product(iterable):
     return prod
 
 
-# uses a permutation to get number of possible passwords.
+# Uses a permutation to get number of possible passwords.
 def nPr(n , r):
     assert 0 <= r <= n
     x = product(range(n - r + 1, n + 1))
     return "your password length has about %s different combanations" % str(x)
 
 
-# the code for the caesarian verson of the encrypt and decrypt program.
+# The code for the caesarian verson of the encrypt and decrypt program.
 def caesarian(fin, fout, choice, alphabet):
     offset = random.randrange(1,len(alphabet))
     if choice=='d':
@@ -78,7 +78,7 @@ def caesarian(fin, fout, choice, alphabet):
         fout.write(line2)
 
 
-# the code for the pseudo random verson of the encrypt and decrypt program.
+# The code for the pseudo random verson of the encrypt and decrypt program.
 def pseudoRandom(fin, fout, choice, alphabet, password):
     for line1 in fin:
         random.seed(password)
@@ -94,9 +94,9 @@ def pseudoRandom(fin, fout, choice, alphabet, password):
         fout.write(line2)
 
 
-# the code for the substitution verson of the encrypt and decrypt program.
+# The code for the substitution verson of the encrypt and decrypt program.
 def substitution(fin, fout, choice, alphabet, password):
-    # encryption code.
+    # Encryption code.
 	if choice == "e":
 		alphabetList = []
 		for x in alphabet:
@@ -115,7 +115,7 @@ def substitution(fin, fout, choice, alphabet, password):
 						new_line += alphabetList[k]
 						break
 			fout.write(new_line)
-    # decryption code.
+    # Decryption code.
 	elif choice == "d":
 
 		alphabetList = []
@@ -140,7 +140,7 @@ def substitution(fin, fout, choice, alphabet, password):
 		fout.write(new_line)
 
 
-# encription idea, under construction.
+# Encription idea, under construction.
 def multiplePasswords(fin, fout, choice, alphabet, passwordList):
 	if choice == "e":
 		alphabetList = []
@@ -152,7 +152,7 @@ def multiplePasswords(fin, fout, choice, alphabet, passwordList):
 		pass
 
 
-# lets you choose which version of the encryption/decryption you want to use.
+# Lets you choose which version of the encryption/decryption you want to use.
 def methodMenu():
 	print """Which method do you want to use?
 (c)aesarian fixed offset
@@ -169,7 +169,7 @@ def methodMenu():
 		methodMenu()
 
 
-# lets you choose if you want to encrypt or decrypt.
+# Lets you choose if you want to encrypt or decrypt.
 def startMenu():
 	print "Do you want to encrypt or decrypt?"
 	print "(e)ncrypt"
@@ -186,7 +186,7 @@ def startMenu():
 		startMenu()
 
 
-# prints the description of the program.
+# Prints the description of the program.
 def printDescription():
 	print """This program encrypts and decrypts messages, using multiple encryption methods.
 Input files must be in the same directory as this program.
@@ -194,31 +194,31 @@ Output files will be created in this same directory."""
 
 
 def main():
-	# defines the main alphabet.
+	# Defines the main alphabet.
 	alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.?! \t\n\r"
 
-	# calls the functions that will get the information that the program needs.
+	# Calls the functions that will get the information that the program needs.
 	printDescription()
 	encryptOrDecrypt = startMenu()
 	choice = methodMenu()
 
-	# begins main loop.
+	# Begins main loop.
 	while 1:
 
-		# if the chose to quit the program the loop breaks.
+		# If they choose to quit the program, the loop breaks.
 		if encryptOrDecrypt == "q":
 			break
 
-		# gets the input file and creates the output file to write to.
+		# Gets the input file and creates the output file to write to.
 		sourceFile, destinationFile, password = getInformation(encryptOrDecrypt)
 
 		fin = open(sourceFile, "rb")
 		fout = open(destinationFile, "wb")
 
-		# seeds the password into all random funtion methods.
+		# Seeds the password into all random funtion methods.
 		random.seed(password)
 
-		# finds which encryption/decryption method was chosen.
+		# Finds which encryption/decryption method was chosen.
 		if choice == "c":
 			caesarian(fin, fout, encryptOrDecrypt, alphabet)
 		elif choice == "p":
@@ -226,19 +226,19 @@ def main():
 		elif choice == "s":
 			substitution(fin, fout, encryptOrDecrypt, alphabet, password)
 
-		# closes input and output files.
+		# Closes input and output files.
 		fin.close()
 		fout.close()
 
-		# tells user the the program has succsesfuly encrypted or decrypted the input files
+		# Tells user the the program has succsesfuly encrypted or decrypted the input files,
 		# also tell the user how many possible combinations there password length has.
 		finalConformation(encryptOrDecrypt, password, alphabet)
 
-		# ends the loop.
+		# Ends the loop.
 		break
 
 
-# calling main to start the program.
+# Calling main to start the program.
 if __name__ == "__main__":
 	main()
 
