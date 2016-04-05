@@ -151,6 +151,16 @@ def multiplePasswords(fin, fout, choice, alphabet, passwordList):
 	if choice == "d":
 		pass
 
+def rotatingAlphabets(fin, fout, choice, alphabet, passwordList):
+	#getPasswords()
+	if choice == "e":
+		alphabetList = []
+
+
+
+		pass
+	if choice == "d":
+		pass
 
 # Lets you choose which version of the encryption/decryption you want to use.
 def methodMenu():
@@ -195,7 +205,7 @@ Output files will be created in this same directory."""
 
 def main():
 	# Defines the main alphabet.
-	alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.?! \t\n\r"
+	alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.?!\"'@#$%^&*()_-+=<>[]{};:\\|`~ \t\n\r"
 
 	# Calls the functions that will get the information that the program needs.
 	printDescription()
